@@ -17,5 +17,9 @@ Route::group(['middleware' => 'web', 'prefix' => 'blog', 'namespace' => 'Modules
         	'as' => 'documents.upload', 
         	'uses' => 'DocumentController@upload'
         ]);
+        Route::get('read/{filename}', [
+			'as' => 'documents.read', 
+			'uses' => 'DocumentController@read'
+		]);
 	});
 });

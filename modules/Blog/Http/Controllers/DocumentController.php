@@ -7,7 +7,7 @@ use Modules\Blog\Entities\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response;
 class DocumentController extends Controller {
 	
 	public function index()
@@ -33,14 +33,20 @@ class DocumentController extends Controller {
 	}
 
 
-	public function download($filename){
+	public function download($filename)
+	{
 	
 		$doc = Document::where('filename', '=', $filename)->firstOrFail();
 		$file = public_path().'/uploads/'.$doc->filename;
 		$response = new Response($file, 200);
 		return response()->download($file);
-
-		// return $response->header('Content-Type', $doc->mime);
 	} 
 
+	public function read($filename)
+	{		
+		$file = Document::where('filename', '=', $filename)->firstOrFail();
+		$url = public_path().'/uploads/'.$filename;
+		// dd($url);
+		return view('blog::documents.view', compact('file','url'));
+	}
 }

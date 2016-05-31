@@ -14,6 +14,7 @@
 		@foreach($documents as $doc)
 			<div class="col-md-2">
 				<a href="{{ URL::route('documents.download',$doc->filename)}}"> {{ $doc->filename }}</a>
+				<a href="{{ URL::route('documents.read',$doc->filename)}}"> Read</a>
 		    </div>
 		 @endforeach
  	</ul>
